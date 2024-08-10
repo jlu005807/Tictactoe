@@ -1,5 +1,6 @@
 #include<graphics.h>
 #include<TCHAR.H>
+#include<time.h>
 #include<easyx.h>
 #include<iostream>
 
@@ -7,25 +8,40 @@
 //当前玩家
 char player;
 //运行状态
-bool is_runing;
+bool is_running;
 
 //棋盘状态
 char Piece_Board[3][3];
 
-void init_game()
+//选择结果
+int result;
+
+//初始化棋盘
+void init_Board_player()
 {
-	initgraph(600, 600);
 
 	//随机先手
-	int i = rand() % 1;
+	srand((unsigned int)time(0));
+	int i = rand() % 2;
+
 	if (i == 0)player = 'O';
 	else player = 'X';
 
-	is_runing = true;
 
 	for (int x = 0; x < 3; x++)
 		for (int y = 0; y < 3; y++)
 			Piece_Board[x][y] = '-';
+
+	result = -1;
+}
+
+void init_game()
+{
+	initgraph(600, 600);
+	
+	is_running = true;
+
+	init_Board_player();
 
 	BeginBatchDraw();
 
@@ -113,6 +129,7 @@ void Input_Piece(int x, int y)
 	if (Piece_Board[x][y] == '-')
 	{
 		Piece_Board[x][y] = player;
+
 		//改变玩家
 		if (player == 'O')player = 'X';
 		else player = 'O';
@@ -132,6 +149,42 @@ void Draw()
 	FlushBatchDraw();
 }
 
+//总判定
+void Check()
+{
+	/*static TCHAR message[64];
+	_stprintf_s(message, sizeof(message)/sizeof(TCHAR), _T("%c 玩家获胜\n是否重新开始游戏？"), player);*/
+
+	if (CheckWin('X'))
+	{
+		result=MessageBox(GetHWnd(), _T("X 玩家获胜\n是否重新开始游戏？"), _T("本局游戏结束"),  MB_YESNO | MB_ICONQUESTION);
+	}
+	else if (CheckWin('O'))
+	{
+		result = MessageBox(GetHWnd(), _T("O 玩家获胜\n是否重新开始游戏？"), _T("本局游戏结束"), MB_YESNO | MB_ICONQUESTION);
+	}
+	else if (CheckDraw())
+	{
+		result=MessageBox(GetHWnd(), _T("  平局  \n是否重新开始游戏？"), _T("本局游戏结束"), MB_YESNO | MB_ICONQUESTION);
+	}
+
+
+	/*std::cout << result << std::endl;
+	system("Pause");*/
+	//是否继续游戏
+	if (result == IDYES)
+	{
+		init_Board_player();
+	}
+	else if (result == IDNO)
+	{
+		is_running = false;
+		MessageBox(GetHWnd(), _T("成功退出游戏"), _T("提示"), MB_OK | MB_ICONSTOP);
+	}
+
+
+}
+
 int main()
 {
 	//初始化
@@ -141,10 +194,11 @@ int main()
 	DWORD start_time = GetTickCount();
 
 
-	while (is_runing)
+	while (is_running)
 	{
 		ExMessage msg;
 		//获取数据
+
 		while (peekmessage(&msg))
 		{
 			//检查鼠标左键点击消息
@@ -164,21 +218,7 @@ int main()
 		Draw();
 
 		//判定
-		if (CheckWin('X'))
-		{
-			MessageBox(GetHWnd(), _T("X 玩家获胜"), _T("游戏结束"), MB_OK);
-			is_runing = false;
-		}
-		else if (CheckWin('O'))
-		{
-			MessageBox(GetHWnd(), _T("O 玩家获胜"), _T("游戏结束"), MB_OK);
-			is_runing = false;
-		}
-		else if (CheckDraw())
-		{
-			MessageBox(GetHWnd(), _T("  平局  "), _T("游戏结束"), MB_OK);
-			is_runing = false;
-		}
+		Check();
 
 		DWORD end_time = GetTickCount();
 		DWORD gap_time = end_time - start_time;
