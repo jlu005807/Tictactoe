@@ -1,5 +1,5 @@
 ﻿  tictactoe.cpp
-C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(249,19): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(250,20): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(269,19): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(283,19): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(284,20): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(303,19): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
   Tictactoe.vcxproj -> C:\Users\12894\source\repos\Tictactoe\x64\Debug\Tictactoe.exe

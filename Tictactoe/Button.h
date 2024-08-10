@@ -21,14 +21,45 @@ char Piece_Board[3][3];
 //选择结果
 int result;
 
-//图片
-IMAGE start_img;
+//棋子
+IMAGE *Piece_O=new IMAGE(190,190);
+IMAGE* Piece_X = new IMAGE(190, 190);
+//棋盘
+IMAGE* Board = new IMAGE(600, 600);
 
+//去除白底背景
+void transparentimage(int x, int y, IMAGE img) {
+	IMAGE img1;
+	DWORD* d1;
+	img1 = img;
+	d1 = GetImageBuffer(&img1);
+	float h, s, l;
+	for (int i = 0; i < img1.getheight() * img1.getwidth(); i++) {
+		RGBtoHSL(BGR(d1[i]), &h, &s, &l);
+		/*if (l < 0.03) {
+			d1[i] = BGR(WHITE);
+		}
+		if (d1[i] != BGR(WHITE)) {
+			d1[i] = 0;
+		}*/
+		if (d1[i] == BGR(WHITE))
+			d1[i] = 0;
+
+	}
+	putimage(x, y, &img1, SRCAND);
+	/*putimage(x, y, &img, SRCPAINT);*/
+	//	putimage(x+100,y,&img1);
+	//	putimage(x+200,y,&img);
+}
 
 
 //初始化棋盘
 void init_Board_player()
 {
+
+	loadimage(Piece_O, _T("C:\\Users\\12894\\source\\repos\\Tictactoe\\piece_O.jpg"), 200, 200);
+	loadimage(Piece_X, _T("C:\\Users\\12894\\source\\repos\\Tictactoe\\piece_X.jpg"), 200, 200);
+	loadimage(Board, _T("C:\\Users\\12894\\source\\repos\\Tictactoe\\Board.png"), 600, 600);
 
 	//随机先手
 	srand((unsigned int)time(0));
@@ -87,23 +118,26 @@ bool CheckDraw()
 //绘制棋盘网格
 void DrawBoard()
 {
-	line(0, 200, 600, 200);
+	/*line(0, 200, 600, 200);
 	line(0, 400, 600, 400);
 	line(200, 0, 200, 600);
-	line(400, 0, 400, 600);
+	line(400, 0, 400, 600);*/
+
+	putimage(0, 0, Board);
 }
 
 //绘制"O"
 void DrawCircle(int x, int y)
 {
-	circle(200 * x + 100, 200 * y + 100, 100);
+	transparentimage(200 * x , 200 * y ,*Piece_O);
 }
 
 //绘制"X"
 void DrawX(int x, int y)
 {
-	line(200 * x, 200 * y, 200 * (x + 1), 200 * (y + 1));
-	line(200 * (x + 1), 200 * y, 200 * x, 200 * (y + 1));
+	/*line(200 * x, 200 * y, 200 * (x + 1), 200 * (y + 1));
+	line(200 * (x + 1), 200 * y, 200 * x, 200 * (y + 1));*/
+	transparentimage(200 * x, 200 * y, *Piece_X);
 }
 
 //绘制棋子
@@ -149,7 +183,7 @@ void Input_Piece(int x, int y)
 void Draw_game()
 {
 	cleardevice();
-
+   
 	DrawBoard();
 	DrawAllPiece();
 	DrawTipTxt();
@@ -351,14 +385,15 @@ private:
 				}
 			}
 
-			if (currentIndex == 2)
+			//玩家对战
+			if (currentIndex == 3)
 			{
 				//初始化
 				init_game();
 
 				//sleep
 				DWORD start_time = GetTickCount();
-
+				
 
 				while (is_running)
 				{
@@ -399,6 +434,78 @@ private:
 
 
 			}
+			//人机对战之简单
+			else if (currentIndex == 4)
+			{
+				//初始化(默认玩家为'O')
+				init_game();
+
+				//sleep
+				DWORD start_time = GetTickCount();
+
+
+				while (is_running)
+				{
+					ExMessage msg;
+					//获取数据
+					if(player =='O')
+					{
+						while (peekmessage(&msg))
+						{
+							//检查鼠标左键点击消息
+							if (msg.message == WM_LBUTTONDOWN)
+							{
+								//处理数据
+								//计算落子位置
+								int x = msg.x / 200;
+								int y = msg.y / 200;
+
+								Input_Piece(x, y);
+							}
+
+						}
+					}
+					else if (player == 'X')
+					{
+						Sleep(256);
+						int empty_index[9][2];
+						int empty_num = 0;
+						for(int y=0;y<3;y++)
+							for (int x = 0; x < 3; x++)
+							{
+								if (Piece_Board[x][y] == '-')
+								{
+									empty_index[empty_num][0] = x;
+									empty_index[empty_num][1] = y;
+									empty_num++;
+								}
+							}
+						//随机洛子
+						int key = rand()%empty_num;
+						Input_Piece(empty_index[key][0], empty_index[key][1]);
+					}
+
+					//绘图
+					Draw_game();
+
+					//判定
+					Check();
+
+					DWORD end_time = GetTickCount();
+					DWORD gap_time = end_time - start_time;
+
+					if (gap_time < 1000 / 60)//保持60帧
+					{
+						Sleep(1000 / 60 - gap_time);
+					}
+
+				}
+
+
+
+
+
+			}
 
 		}
 	}
@@ -427,26 +534,41 @@ public:
 		loadimage(page2, _T("C:\\Users\\12894\\source\\repos\\Tictactoe\\th.jpg"), 600, 600);
 		addPage(page2);//添加界面2
 
-		Button* button2_1 = new Button(150, 500, 100, 50, L"玩家对战", [&]() {setCurrentIndex(2); });
+		Button* button2_1 = new Button(150, 500, 100, 50, L"玩家对战", [&]() {setCurrentIndex(3); });
 		addButton(1,button2_1);
 
-		Button* button2_2 = new Button(350, 500, 100, 50, L"人机对战", [&]() {setCurrentIndex(3); });
+		Button* button2_2 = new Button(350, 500, 100, 50, L"人机对战", [&]() {setCurrentIndex(2); });
 		addButton(1, button2_2);
 
 		IMAGE* page3 = new IMAGE(width, height);//可以直接用loadimage()函数加载图片
-		setfillcolor(RGB(0,0,0)); // 设置页面1的背景颜色为
-		solidrectangle(0, 0, width, height); // 绘制页面1的背景矩形
-		getimage(page3, 0, 0, width, height); // 将页面1的内容保存到图片中
-
+		loadimage(page3, _T("C:\\Users\\12894\\source\\repos\\Tictactoe\\page3.jpg"), 600, 600);
 		addPage(page3); // 添加页面3
+
+		Button* button3_1 = new Button(150, 500, 100, 50, L"简单", [&]() {setCurrentIndex(4); });
+		addButton(2, button3_1);
+
+		Button* button3_2 = new Button(400, 500, 100, 50, L"困难", [&]() {setCurrentIndex(5); });
+		addButton(2, button3_2);
 
 		IMAGE* page4 = new IMAGE(width, height);//可以直接用loadimage()函数加载图片
 		setfillcolor(RGB(0, 0, 0)); // 设置页面1的背景颜色为
 		solidrectangle(0, 0, width, height); // 绘制页面1的背景矩形
 		getimage(page4, 0, 0, width, height); // 将页面1的内容保存到图片中
-
 		addPage(page4); // 添加页面4
 
+		IMAGE* page5 = new IMAGE(width, height);//可以直接用loadimage()函数加载图片
+		setfillcolor(RGB(0, 0, 0)); // 设置页面1的背景颜色为
+		solidrectangle(0, 0, width, height); // 绘制页面1的背景矩形
+		getimage(page5, 0, 0, width, height); // 将页面1的内容保存到图片中
+
+		addPage(page5); // 添加页面5
+
+		IMAGE* page6 = new IMAGE(width, height);//可以直接用loadimage()函数加载图片
+		setfillcolor(RGB(0, 0, 0)); // 设置页面1的背景颜色为
+		solidrectangle(0, 0, width, height); // 绘制页面1的背景矩形
+		getimage(page6, 0, 0, width, height); // 将页面1的内容保存到图片中
+
+		addPage(page6); // 添加页面6
 		setCurrentIndex(0);
 	}
 
