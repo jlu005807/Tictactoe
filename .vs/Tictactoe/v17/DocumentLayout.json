@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\12894\\source\\repos\\Tictactoe\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\tictactoe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Tictactoe\\tictactoe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}|Tictactoe\\Tictactoe.vcxproj|C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\Button.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}|Tictactoe\\Tictactoe.vcxproj|solutionrelative:Tictactoe\\Button.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}|Tictactoe\\Tictactoe.vcxproj|C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\tictactoe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}|Tictactoe\\Tictactoe.vcxproj|solutionrelative:Tictactoe\\tictactoe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,15 +43,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Button.h",
+              "DocumentMoniker": "C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\Button.h",
+              "RelativeDocumentMoniker": "Tictactoe\\Button.h",
+              "ToolTip": "C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\Button.h",
+              "RelativeToolTip": "Tictactoe\\Button.h",
+              "ViewState": "AQIAAKMAAAAAAAAAAAAjwL4AAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-10T09:07:02.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "tictactoe.cpp",
               "DocumentMoniker": "C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\tictactoe.cpp",
               "RelativeDocumentMoniker": "Tictactoe\\tictactoe.cpp",
               "ToolTip": "C:\\Users\\12894\\source\\repos\\Tictactoe\\Tictactoe\\tictactoe.cpp",
               "RelativeToolTip": "Tictactoe\\tictactoe.cpp",
-              "ViewState": "AQIAAIcAAAAAAAAAAAA4wKMAAAAmAAAA",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAABEAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-09T03:29:24.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-09T03:29:24.461Z"
             }
           ]
         }
