@@ -58,9 +58,9 @@ void transparentimage(int x, int y, IMAGE img) {
 void init_Board_player()
 {
 
-	loadimage(Piece_O, _T(".\\piece_O.jpg"), 200, 200);
-	loadimage(Piece_X, _T(".\\piece_X.jpg"), 200, 200);
-	loadimage(Board, _T(".\\Board.png"), 600, 600);
+	loadimage(Piece_O, _T(".\\src\\piece_O.jpg"), 200, 200);
+	loadimage(Piece_X, _T(".\\src\\piece_X.jpg"), 200, 200);
+	loadimage(Board, _T(".\\src\\Board.png"), 600, 600);
 
 	//随机先手
 	srand((unsigned int)time(0));
@@ -687,7 +687,7 @@ public:
 		initgraph(width, height);
 
 		IMAGE *page1= new IMAGE(width, height);
-		loadimage(page1, _T(".\\backgroud.jpg"), 600, 600);
+		loadimage(page1, _T(".\\src\\backgroud.jpg"), 600, 600);
 		addPage(page1);//添加界面1
 
 		//在界面一创建按钮一
@@ -695,7 +695,7 @@ public:
 		addButton(0, button1_1);
 		
 		IMAGE *page2 = new IMAGE(width, height);
-		loadimage(page2, _T(".\\backgroud.jpg"), 600, 600);
+		loadimage(page2, _T(".\\src\\backgroud.jpg"), 600, 600);
 		addPage(page2);//添加界面2
 
 		Button* button2_1 = new Button(150, 500, 100, 50, L"玩家对战", [&]() {setCurrentIndex(3); });
@@ -705,7 +705,7 @@ public:
 		addButton(1, button2_2);
 
 		IMAGE* page3 = new IMAGE(width, height);//可以直接用loadimage()函数加载图片
-		loadimage(page3, _T(".\\page3.jpg"), 600, 600);
+		loadimage(page3, _T(".\\src\\page3.jpg"), 600, 600);
 		addPage(page3); // 添加页面3
 
 		Button* button3_1 = new Button(150, 500, 100, 50, L"简单", [&]() {setCurrentIndex(4); });
