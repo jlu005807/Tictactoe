@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include<climits>
 
 //杂项函数
 
@@ -87,6 +88,9 @@ void init_game()
 
 }
 
+
+
+
 //判定胜利
 bool CheckWin(char c)
 {
@@ -114,6 +118,111 @@ bool CheckDraw()
 				return false;
 	return true;
 }
+
+
+int is_Win()
+{
+	if (CheckWin('X'))return 1;
+	else if (CheckWin('O'))return 0;
+	else return -1;
+
+}
+
+int eval()
+{
+	int empty_num = 0;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			if (Piece_Board[i][j] == '-')
+				empty_num++;
+
+	int flag = is_Win();
+	if (flag == 1) return empty_num + 1;
+	if (flag == 0) return -(empty_num + 1);
+	if (flag == -1) return 0;
+
+}
+
+//落子
+void Input_Piece(int x, int y)
+{
+	if (Piece_Board[x][y] == '-')
+	{
+		Piece_Board[x][y] = player;
+
+		//改变玩家
+		if (player == 'O')player = 'X';
+		else player = 'O';
+	}
+
+}
+
+int MinMaxSearch(int& idx, int step, int a, int b)//剪枝版本,a代表最大下限,b代表最大上限 
+{
+
+	if (is_Win() >= 0) 
+	{
+		return eval(); //有一方赢了(此时不考虑平局）
+		
+	}
+	if (step & 1) a = INT_MIN;
+	else b = INT_MAX;
+
+	std::vector<int> positions;//记录还有那些位置可以下棋
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			if (Piece_Board[i][j] == '-') positions.push_back(i * 3 + j);
+
+	if (positions.size() == 0) return eval();//平局的情况 
+	
+	for (int i = 0; i < positions.size(); i++)
+	{
+		/*std::cout << step << std::endl;
+		system("Pause");*/
+
+		int x = positions[i];
+		int t = x;
+		Piece_Board[x / 3][x % 3] = (step & 1) ? 'X' : 'O';
+		int Sonval = MinMaxSearch(x, step+1, a, b);
+		Piece_Board[t / 3][t % 3] = '-';
+
+		if (step & 1)
+		{
+			if (a < Sonval)
+			{
+				a = Sonval;
+				if (step == 1)
+				{
+					idx = positions[i];
+					/*std::cout << idx << std::endl;
+					system("Pause")*/
+				}
+				if (a >= b) break;
+			}
+		}
+		else
+		{
+			if (b > Sonval)
+			{
+				b = Sonval;
+				if (a >= b) break;
+			}
+		}
+	}
+	if (step & 1) return a;
+	else return b;
+}
+
+void com_play()
+{
+	int x;//电脑下的位置
+	MinMaxSearch(x, 1, INT_MIN, INT_MAX);//a - b剪枝 
+	/*std::cout << x <<" "<<x/3<<" "<<x%3<<std::endl;
+	system("pause");*/
+
+	Input_Piece(x / 3, x % 3);
+}
+ 
 
 //绘制棋盘网格
 void DrawBoard()
@@ -165,19 +274,7 @@ void DrawTipTxt()
 	outtextxy(0, 0, str);
 }
 
-//落子
-void Input_Piece(int x, int y)
-{
-	if (Piece_Board[x][y] == '-')
-	{
-		Piece_Board[x][y] = player;
 
-		//改变玩家
-		if (player == 'O')player = 'X';
-		else player = 'O';
-	}
-
-}
 
 //总渲染
 void Draw_game()
@@ -506,6 +603,73 @@ private:
 
 
 			}
+			//人机对战之困难
+			else if (currentIndex == 5)
+			{
+				//初始化(默认玩家为'O')
+				init_game();
+
+				//sleep
+				DWORD start_time = GetTickCount();
+
+				int first = 1;
+				while (is_running)
+				{
+					ExMessage msg;
+					//获取数据
+					if (player == 'O')
+					{
+						while (peekmessage(&msg))
+						{
+							//检查鼠标左键点击消息
+							if (msg.message == WM_LBUTTONDOWN)
+							{
+								//处理数据
+								//计算落子位置
+								int x = msg.x / 200;
+								int y = msg.y / 200;
+
+								Input_Piece(x, y);
+								first = 0;
+							}
+
+						}
+					}
+					else if (player == 'X')
+					{
+						Sleep(256);
+						if (first)//第一次落中间
+						{
+							if (Piece_Board[1][1] == '-')
+								Input_Piece(1, 1);
+						}
+						else
+						{
+							com_play();
+						}
+					}
+
+					//绘图
+					Draw_game();
+
+					//判定
+					Check();
+
+					DWORD end_time = GetTickCount();
+					DWORD gap_time = end_time - start_time;
+
+					if (gap_time < 1000 / 60)//保持60帧
+					{
+						Sleep(1000 / 60 - gap_time);
+					}
+
+				}
+
+
+
+
+
+				}
 
 		}
 	}

@@ -1,9 +1,10 @@
 ﻿  tictactoe.cpp
-C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(283,19): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(284,20): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
-C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(303,19): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(380,19): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(381,20): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(400,19): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
   正在生成代码
   Previous IPDB not found, fall back to full compilation.
-  All 354 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+C:\Users\12894\source\repos\Tictactoe\Tictactoe\Button.h(144): warning C4715: “eval”: 不是所有的控件路径都返回值
+  All 402 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
   Tictactoe.vcxproj -> C:\Users\12894\source\repos\Tictactoe\x64\Release\Tictactoe.exe
