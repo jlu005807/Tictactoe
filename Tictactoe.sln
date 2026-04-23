@@ -5,6 +5,11 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tictactoe", "Tictactoe\Tictactoe.vcxproj", "{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TictactoeTests", "tests\TictactoeTests.vcxproj", "{9E5FEC96-3F62-4E14-9423-267281A31A24}"
+	ProjectSection(ProjectDependencies) = postProject
+		{753B7CF5-6280-43C5-B67D-B8CC782BC9D2} = {753B7CF5-6280-43C5-B67D-B8CC782BC9D2}
+	EndProjectSection
+EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Tictactoe_Setup", "Tictactoe_Setup\Tictactoe_Setup.vdproj", "{979AACB1-4E3A-472A-93D4-6428E12AEE58}"
 EndProject
 Global
@@ -23,10 +28,17 @@ Global
 		{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}.Release|x64.Build.0 = Release|x64
 		{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}.Release|x86.ActiveCfg = Release|Win32
 		{753B7CF5-6280-43C5-B67D-B8CC782BC9D2}.Release|x86.Build.0 = Release|Win32
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Debug|x64.ActiveCfg = Debug|x64
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Debug|x64.Build.0 = Debug|x64
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Debug|x86.ActiveCfg = Debug|Win32
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Debug|x86.Build.0 = Debug|Win32
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Release|x64.ActiveCfg = Release|x64
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Release|x64.Build.0 = Release|x64
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Release|x86.ActiveCfg = Release|Win32
+		{9E5FEC96-3F62-4E14-9423-267281A31A24}.Release|x86.Build.0 = Release|Win32
 		{979AACB1-4E3A-472A-93D4-6428E12AEE58}.Debug|x64.ActiveCfg = Debug
 		{979AACB1-4E3A-472A-93D4-6428E12AEE58}.Debug|x86.ActiveCfg = Debug
 		{979AACB1-4E3A-472A-93D4-6428E12AEE58}.Release|x64.ActiveCfg = Release
-		{979AACB1-4E3A-472A-93D4-6428E12AEE58}.Release|x64.Build.0 = Release
 		{979AACB1-4E3A-472A-93D4-6428E12AEE58}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

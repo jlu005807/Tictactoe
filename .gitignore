@@ -32,6 +32,7 @@ Tictactoe/Release/
 Tictactoe/x64/Debug/
 Tictactoe/x64/Release/
 Tictactoe_Setup/Debug/
+tests/x64/
 # 资源文件
 *.aps
 *.rc
@@ -41,3 +42,6 @@ Tictactoe_Setup/Debug/
 *.tmp
 *.log
 *.tlog/ 
+
+
+references/

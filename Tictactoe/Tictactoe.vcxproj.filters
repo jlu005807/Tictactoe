@@ -15,12 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tictactoe.cpp">
+    <ClCompile Include="cpp\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Widget.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Button.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\GameFlow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp\GameRenderer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="include\Button.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Widget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameFlow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameRenderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
